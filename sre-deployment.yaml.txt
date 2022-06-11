@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sre-demo
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: sre-demo
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      type: frontend
+      env: dev
+  template:
+    metadata:
+      name: podtemplate
+      namespace: project02
+      labels:
+        type: frontend
+        env: dev
+    spec:
+      containers:
+        - name: webcon
+          image: 311037684946.dkr.ecr.us-east-1.amazonaws.com/sre-demo-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: apache
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 150m
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 150Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svcforfirstapp
+  namespace: sre-demo
+spec:
+  type: LoadBalancer
+  selector:
+    type: frontend
+    env: dev
+  ports:
+    - name: apache
+      port: 80
+      protocol: TCP
+      targetPort: 80
