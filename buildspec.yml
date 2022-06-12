@@ -14,7 +14,7 @@ phases:
       - echo cleaning up the existing localy build docker image...
       - docker --version
       - aws ecr batch-delete-image --repository-name sre-demo-app --image-ids imageTag=latest
-      - sleep 45
+      - sleep 60
       - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:latest .
   post_build:

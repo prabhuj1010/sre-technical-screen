@@ -6,5 +6,3 @@ docker run -p 8080:80 sre-technical-screen
 
 curl http://localhost:8080
 ```
-
-test
