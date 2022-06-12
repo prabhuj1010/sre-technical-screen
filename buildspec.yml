@@ -25,7 +25,7 @@ phases:
       - curl -LO https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl
       - mv kubectl /usr/bin
       - chmod +x /usr/bin/kubectl
-      - aws eks update-kubeconfig --region us-east-1 --name sre-demo-cluster --role-arn arn:aws:iam::311037684946:role/service-role/codebuild-sre-demo-pipeline-service-role
+      - aws eks update-kubeconfig --region us-east-1 --name sre-demo-cluster
       - kubectl apply -f sre-deployment.yaml
 artifacts:  
   files: imagedefinitions.json
