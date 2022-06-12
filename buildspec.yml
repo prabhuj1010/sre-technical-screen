@@ -22,8 +22,6 @@ phases:
       - echo Writing image definitions file...
       - printf '[{"name":"sreapp","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
       - cat imagedefinitions.json
-  deploy:
-    commands:
       - curl -LO https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl
       - mv kubectl /usr/bin
       - chmod +x /usr/bin/kubectl
