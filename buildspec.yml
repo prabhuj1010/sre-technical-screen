@@ -11,8 +11,10 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - echo Building the Docker image...
+      - echo Cleaning up the existing Docker image if any in ECR...
       - docker --version
+      - docker image rm -f $REPOSITORY_URI:latest
+      - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:latest .
   post_build:
     commands:
