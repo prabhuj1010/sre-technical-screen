@@ -1,5 +1,9 @@
 version: 0.2
 
+env:
+  exported-variables:
+    - access_key
+    - secret_key
 
 phases:
   pre_build:
@@ -25,6 +29,8 @@ phases:
       - curl -LO https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl
       - mv kubectl /usr/bin
       - chmod +x /usr/bin/kubectl
+      - export AWS_ACCESS_KEY_ID = $access_key
+      - export AWS_SECRET_ACCESS_KEY = $secret_key
       - aws eks update-kubeconfig --region us-east-1 --name sre-demo-cluster
       - cat /root/.kube/config
       - kubectl apply -f sre-deployment.yaml
