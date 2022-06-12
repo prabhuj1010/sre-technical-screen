@@ -26,6 +26,7 @@ phases:
       - mv kubectl /usr/bin
       - chmod +x /usr/bin/kubectl
       - aws eks update-kubeconfig --region us-east-1 --name sre-demo-cluster
+      - kubectl config get-context
       - kubectl apply -f sre-deployment.yaml
 artifacts:  
   files: imagedefinitions.json
