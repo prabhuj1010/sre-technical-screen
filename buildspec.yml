@@ -25,7 +25,6 @@ phases:
       - curl -LO https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl
       - mv kubectl /usr/bin
       - chmod +x /usr/bin/kubectl
-      - aws sts get-caller-identity
       - aws eks update-kubeconfig --region us-east-1 --name sre-demo-cluster
       - kubectl apply -f sre-deployment.yaml
 artifacts:  
